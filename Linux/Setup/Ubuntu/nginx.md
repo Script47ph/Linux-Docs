@@ -80,7 +80,7 @@ Any changes configuration must be restart/reload service first for take effect.
 ```conf
 server {
     # Listeing HTTPS Port
-    listen 443;
+    listen 443 ssl;
     listen [::]:443 ssl ipv6only=on;
 
     # SSL/TLS Certificate
