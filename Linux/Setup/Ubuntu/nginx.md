@@ -131,3 +131,20 @@ server {
     return 404;
 }
 ```
+
+### Reverse Proxy
+
+```conf
+upstream backend {
+    server 192.168.30.11;
+}
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name yourdomain.com;
+
+    location / {
+        proxy_pass http://backend;
+    }
+}
