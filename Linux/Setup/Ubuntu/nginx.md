@@ -75,3 +75,59 @@ Any changes configuration must be restart/reload service first for take effect.
 
     sudo systemctl restart nginx
 
+### SSL/TLS Virtualhost
+
+```conf
+server {
+    # Listeing HTTPS Port
+    listen 443;
+    listen [::]:443 ssl ipv6only=on;
+
+    # SSL/TLS Certificate
+    ssl_certificate <yourdirectoriy>/fullchain.pem;
+    ssl_certificate_key <yourdirectory>/privkey.pem;
+    # ssl_dhparam <yourdirectory>/ssl-dhparams.pem;
+
+    # Server Name 
+    server_name yourdomain.com;
+
+    # Index File
+    index   index.php index.html index.htm;
+    
+    # Root Directory
+    # Set root directory as "public_html"
+    set $docroot "public_html";
+    # If directory "public" exist, set root directory as "public"
+    if (-d "/var/www/yourdomain.com/public_html/public") {
+        set $docroot "public_html/public";
+    }
+    # If directory "wordpress" exist, set root directory as "wordpress"
+    if (-d "/var/www/yourdomain.com/public_html/wordpress") {
+        set $docroot "public_html/wordpress";
+    }
+    root "/var/www/yourdomain.com/${docroot}";
+
+    location / {
+            try_files $uri $uri/ =404;
+    }
+
+    # Htaccess access permission
+    location ~ /\.ht {
+        deny all;
+    }
+}
+server {
+    # Listeing HTTP Port
+    listen 80;
+    listen [::]:80;
+
+    # Server Name 
+    server_name yourdomain.com;
+
+    # Redirect to HTTPS
+    if ($host = yourdomain.com) {
+        return 301 https://$host$request_uri;
+    }
+    return 404;
+}
+```
