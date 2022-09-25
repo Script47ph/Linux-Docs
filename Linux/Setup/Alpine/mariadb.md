@@ -41,6 +41,13 @@ sudo /etc/init.d/mariadb start && \
 sudo mysql_secure_installation
 ```
 
+**Disable root login without password from console**
+
+```bash
+sudo mysql -u root -e "UPDATE mysql.user SET plugin='mysql_native_password' WHERE User='root' AND host = 'localhost';" && \
+sudo mysql -u root -e "FLUSH PRIVILEGES;"
+```
+
 ### Create Mysql User
 
 User can be created by two method:
