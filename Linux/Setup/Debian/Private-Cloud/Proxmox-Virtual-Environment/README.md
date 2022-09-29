@@ -129,4 +129,81 @@ iface vmbr0 inet static
         post-up   echo 1 > /proc/sys/net/ipv4/ip_forward
         post-up   iptables -t nat -A POSTROUTING -s '10.10.10.0/24' -o eno1 -j MASQUERADE
         post-down iptables -t nat -D POSTROUTING -s '10.10.10.0/24' -o eno1 -j MASQUERADE
+        post-up   iptables -t raw -I PREROUTING -i fwbr+ -j CT --zone 1
+    	post-down iptables -t raw -D PREROUTING -i fwbr+ -j CT --zone 1
+
+```
+
+### Activate DHCP Server
+
+**Install dnsmasq**
+
+```
+sudo apt install dnsmasq -y
+```
+
+**Configure dnsmasq**
+
+Add the following configuration in the end of line `/etc/dnsmasq.conf`:
+
+```
+# My Config
+# Your proxmox interface, eg: 'vmbr0'
+interface=vmbr0
+# Change with your favorite range
+dhcp-range=10.10.10.2,10.10.10.100,12h
+# Configure ip option with ipv4 vmbr0 interface, eg: 10.10.10.1
+dhcp-option=vmbr0,3,10.10.10.1
+# public dns
+server=8.8.8.8
+server=8.8.4.4
+# DHCP lease database file path
+dhcp-leasefile=/var/lib/misc/dnsmasq.leases
+```
+
+Save configuration and check with this command:
+
+```
+dnsmasq --test
+```
+
+**Services**
+
+```
+# Restart services
+sudo systemctl restart dnsmasq
+# Enable services
+sudo systemctl enable dnsmasq
+```
+
+### Iptables for port forwarding
+
+**Install iptables-persistent**
+
+```
+sudo apt install iptables-persistent -y
+```
+
+**Add new rules port forward to iptables**
+
+```
+sudo iptables -t nat -A PREROUTING -p tcp --dport listen_hostport -j DNAT --to-destination ip_vm:listen_guestport
+```
+
+**Save iptables rules**
+
+```
+sudo iptables-save > /etc/iptables/rules.v4
+```
+
+**Check iptables rules**
+
+```
+sudo iptables -t nat -L --line-numbers
+```
+
+**Delete rules from iptables**
+
+```
+sudo iptables -t nat -D PREROUTING list_number 
 ```
