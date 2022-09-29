@@ -12,11 +12,15 @@ function update {
         sudo apt dist-upgrade -y
         echo "Install dependencies"
         sudo apt-get install -y $package
+        sudo systemctl start qemu-guest-agent
+        sudo systemctl enable qemu-guest-agent
     elif [ -f /usr/bin/yum ]; then
         echo "Redhat based system detected"
         sudo yum update -y
         echo "Install dependencies"
         sudo yum install -y $package
+        sudo systemctl start qemu-guest-agent
+        sudo systemctl enable qemu-guest-agent
     else
         echo "No package manager found"
         exit 1
