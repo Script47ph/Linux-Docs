@@ -78,12 +78,19 @@ Create custom cloud-init configuration:
 ```bash
 cat <<EOF > /var/lib/vz/snippets/vendor.yaml
 #cloud-config
+timezone: Asia/Jakarta
+local: en_US
+ntp:
+  enabled: true
+  ntp_client: chrony
 packages_update: true
 packages_upgrade: true
 packages:
   - qemu-guest-agent
 runcmd:
   - apt-get install -y --install-recommends linux-generic-hwe-18.04
+  - apt-get clean
+  - apt-get remove
   - reboot
 EOF
 ```
