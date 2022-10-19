@@ -3,7 +3,7 @@
 ### Download the latest cloud image
 
 ```bash
-wget -o /var/lib/vz/template/iso/bionic-server-cloudimg-amd64.img https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img
+wget -O /var/lib/vz/template/iso/bionic-server-cloudimg-amd64.img https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img
 ```
 
 ### Create a new VM
@@ -45,7 +45,7 @@ qm set vmid --serial0 socket --vga serial0
 ### Get custom cloud-init configuration
 
 ```bash
-wget -o /var/lib/vz/snippets/vendor-ubuntu-bionic.yaml https://raw.githubusercontent.com/Script47ph/Linux-Docs/main/Linux/Setup/Debian/Private-Cloud/Proxmox-Virtual-Environment/cloud-init/bionic/vendor-bionic.yml
+wget -O /var/lib/vz/snippets/vendor-ubuntu-bionic.yaml https://raw.githubusercontent.com/Script47ph/Linux-Docs/main/Linux/Setup/Debian/Private-Cloud/Proxmox-Virtual-Environment/cloud-init/bionic/vendor-bionic.yml
 ```
 
 ### Attach the custom cloud-init configuration to the VM

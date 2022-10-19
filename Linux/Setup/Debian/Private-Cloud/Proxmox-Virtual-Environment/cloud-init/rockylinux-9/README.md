@@ -3,7 +3,7 @@
 ### Download the latest cloud image
 
 ```bash
-wget -o /var/lib/vz/template/iso/Rocky-9-GenericCloud.latest.x86_64.qcow2 https://download.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud.latest.x86_64.qcow2
+wget -O /var/lib/vz/template/iso/Rocky-9-GenericCloud.latest.x86_64.qcow2 https://download.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud.latest.x86_64.qcow2
 ```
 
 ### Create a new VM
@@ -45,7 +45,7 @@ qm set vmid --serial0 socket --vga serial0
 ### Get custom cloud-init configuration
 
 ```bash
-wget -o /var/lib/vz/snippets/vendor-rhel-9-based.yaml https://raw.githubusercontent.com/Script47ph/Linux-Docs/main/Linux/Setup/Debian/Private-Cloud/Proxmox-Virtual-Environment/cloud-init/rhel-based/vendor-rhel-9-based.yml
+wget -O /var/lib/vz/snippets/vendor-rhel-9-based.yaml https://raw.githubusercontent.com/Script47ph/Linux-Docs/main/Linux/Setup/Debian/Private-Cloud/Proxmox-Virtual-Environment/cloud-init/rhel-based/vendor-rhel-9-based.yml
 ```
 
 ### Attach the custom cloud-init configuration to the VM

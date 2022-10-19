@@ -3,7 +3,7 @@
 ### Download the latest cloud image
 
 ```bash
-wget -o /var/lib/vz/template/iso/CentOS-7-x86_64-GenericCloud-2111.qcow2 https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-2111.qcow2
+wget -O /var/lib/vz/template/iso/CentOS-7-x86_64-GenericCloud-2111.qcow2 https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-2111.qcow2
 ```
 
 ### Create a new VM
@@ -45,7 +45,7 @@ qm set vmid --serial0 socket --vga serial0
 ### Get custom cloud-init configuration
 
 ```bash
-wget -o /var/lib/vz/snippets/vendor-centos-7.yaml https://raw.githubusercontent.com/Script47ph/Linux-Docs/main/Linux/Setup/Debian/Private-Cloud/Proxmox-Virtual-Environment/cloud-init/centos-7/vendor-centos-7.yml
+wget -O /var/lib/vz/snippets/vendor-centos-7.yaml https://raw.githubusercontent.com/Script47ph/Linux-Docs/main/Linux/Setup/Debian/Private-Cloud/Proxmox-Virtual-Environment/cloud-init/centos-7/vendor-centos-7.yml
 ```
 
 ### Attach the custom cloud-init configuration to the VM
