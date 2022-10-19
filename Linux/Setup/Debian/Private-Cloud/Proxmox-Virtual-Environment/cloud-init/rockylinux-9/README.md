@@ -27,7 +27,7 @@ wget -O ${OUTPUTDIR}/${OUTPUTFILE} ${CLOUDIMGURL}
 ### Create a new VM
 
 ```bash
-qm create ${VMID} --name ${VMNAME} --machine ${VMMACHINE} --memory ${VMMEMORY} --net0 ${VMNET0} --cpu ${HOST}
+qm create ${VMID} --name ${VMNAME} --machine ${VMMACHINE} --memory ${VMMEMORY} --net0 ${VMNET0} --cpu ${VMHOST}
 ```
 
 ### Import the cloud image
