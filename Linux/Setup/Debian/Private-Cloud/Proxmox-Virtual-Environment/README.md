@@ -184,10 +184,22 @@ sudo systemctl enable dnsmasq
 sudo apt install iptables-persistent -y
 ```
 
+**Add environment variables**
+
+```
+export HOST_PORT=
+export GUEST_IP=
+export GUEST_PORT=
+export TABLE=nat
+export APPEND=PREROUTING
+export PROTOCOL=tcp
+export JUMP=DNAT
+```
+
 **Add new rules port forward to iptables**
 
 ```
-sudo iptables -t nat -A PREROUTING -p tcp --dport listen_hostport -j DNAT --to-destination ip_vm:listen_guestport
+sudo iptables -t ${TABLE} -A ${APPEND} -p ${PROTOCOL} --dport ${HOST_PORT} -j ${JUMP} --to-destination ${GUEST_IP}:${GUEST_PORT}
 ```
 
 **Save iptables rules**
@@ -199,11 +211,11 @@ sudo iptables-save > /etc/iptables/rules.v4
 **Check iptables rules**
 
 ```
-sudo iptables -t nat -L --line-numbers
+sudo iptables -t ${TABLE} -L --line-numbers
 ```
 
 **Delete rules from iptables**
 
 ```
-sudo iptables -t nat -D PREROUTING list_number 
+sudo iptables -t ${TABLE} -D ${APPEND} list_number 
 ```
