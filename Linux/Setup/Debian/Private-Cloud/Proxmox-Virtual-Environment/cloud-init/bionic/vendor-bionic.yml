@@ -14,7 +14,7 @@ runcmd:
   - |
     apt-get clean
     apt-get remove
-    chage -d 0 $(grep 1000 /etc/passwd | cut -d: -f1
+    chage -d 0 $(grep 1000 /etc/passwd | cut -d: -f1)
     sed -i "s,PasswordAuthentication no,PasswordAuthentication yes," /etc/ssh/sshd_config
     systemctl restart sshd
     shutdown -r now
