@@ -1,20 +1,20 @@
-## Ubuntu Jammy Cloud Image base for Proxmox
+## Centos 8 Stream Cloud Image base for Proxmox
 
 ### Export VM variables
 
 ```bash
 export VMID=
-export VMNAME=Ubuntu-Jammy
+export VMNAME=Centos-8-Stream
 export VMMACHINE=q35
 export VMMEMORY=1024
 export VMNET0=virtio,bridge=vmbr0
 export PROXMOXSTRG=local
 export OUTPUTDIR=/var/lib/vz/template/iso
-export OUTPUTFILE=jammy-server-cloudimg-amd64.img
-export CLOUDIMGURL=https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+export OUTPUTFILE=CentOS-Stream-GenericCloud-8-20220913.0.x86_64.qcow2
+export CLOUDIMGURL=https://cloud.centos.org/centos/8-stream/x86_64/images/CentOS-Stream-GenericCloud-8-20220913.0.x86_64.qcow2
 export CLOUDINITDIR=/var/lib/vz/snippets
-export CLOUDINITFILE=vendor-ubuntu-jammy.yaml
-export CLOUDINITURL=https://raw.githubusercontent.com/Script47ph/Linux-Docs/main/Linux/Setup/Debian/Private-Cloud/Proxmox-Virtual-Environment/cloud-init/jammy/vendor-jammy.yml
+export CLOUDINITFILE=vendor-centos-8-stream.yaml
+export CLOUDINITURL=https://raw.githubusercontent.com/Script47ph/Linux-Docs/main/Linux/Setup/Debian/Private-Cloud/Proxmox-Virtual-Environment/cloud-init/centos-8-stream/vendor-centos-8-stream.yml
 ```
 
 ### Download the latest cloud image
