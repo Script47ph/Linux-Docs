@@ -4,11 +4,9 @@ local: en_US
 ntp:
   enabled: true
   ntp_client: chrony
-packages:
-  - zram-generator
-  - nano
-  - vim
 runcmd:
+  - dnf config-manager --set-enabled crb
+  - dnf install -y epel-release
   - dnf clean all
   - chage -d 0 $(cat /etc/passwd | awk -F ':' '{print $1}' | tail -n1)
   - shutdown -r now

@@ -4,11 +4,9 @@ local: en_US
 ntp:
   enabled: true
   ntp_client: chrony
-# packages:
-#   - zram-generator
-#   - nano
-#   - vim
 runcmd:
+  - dnf config-manager --set-enabled powertools
+  - dnf install -y epel-release
   - dnf install -y zram-generator nano vim
   - dnf clean all
   - rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
