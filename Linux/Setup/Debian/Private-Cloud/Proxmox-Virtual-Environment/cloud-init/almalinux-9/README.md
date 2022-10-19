@@ -6,6 +6,7 @@
 export VMID=
 export VMNAME=AmlaLinux-9
 export VMMACHINE=q35
+export VMHOST=host
 export VMMEMORY=1024
 export VMNET0=virtio,bridge=vmbr0
 export PROXMOXSTRG=local
@@ -26,7 +27,7 @@ wget -O ${OUTPUTDIR}/${OUTPUTFILE} ${CLOUDIMGURL}
 ### Create a new VM
 
 ```bash
-qm create ${VMID} --name ${VMNAME} --machine ${VMMACHINE} --memory ${VMMEMORY} --net0 ${VMNET0}
+qm create ${VMID} --name ${VMNAME} --machine ${VMMACHINE} --memory ${VMMEMORY} --net0 ${VMNET0} --cpu ${VMHOST}
 ```
 
 ### Import the cloud image
