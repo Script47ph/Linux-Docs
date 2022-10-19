@@ -13,8 +13,8 @@ export OUTPUTDIR=/var/lib/vz/template/iso
 export OUTPUTFILE=CentOS-Stream-GenericCloud-8-20220913.0.x86_64.qcow2
 export CLOUDIMGURL=https://cloud.centos.org/centos/8-stream/x86_64/images/CentOS-Stream-GenericCloud-8-20220913.0.x86_64.qcow2
 export CLOUDINITDIR=/var/lib/vz/snippets
-export CLOUDINITFILE=vendor-rhel-8-based.yaml
-export CLOUDINITURL=https://raw.githubusercontent.com/Script47ph/Linux-Docs/main/Linux/Setup/Debian/Private-Cloud/Proxmox-Virtual-Environment/cloud-init/rhel-based/vendor-rhel-8-based.yml
+export CLOUDINITFILE=vendor-centos-8-stream.yaml
+export CLOUDINITURL=https://raw.githubusercontent.com/Script47ph/Linux-Docs/main/Linux/Setup/Debian/Private-Cloud/Proxmox-Virtual-Environment/cloud-init/centos-8-stream/vendor-centos-8-stream.yml
 ```
 
 ### Download the latest cloud image
