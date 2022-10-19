@@ -4,7 +4,7 @@
 
 ```bash
 export VMID=
-export VMNAME=AmlaLinux-9
+export VMNAME=AlmaLinux-9
 export VMMACHINE=q35
 export VMHOST=host
 export VMMEMORY=1024
