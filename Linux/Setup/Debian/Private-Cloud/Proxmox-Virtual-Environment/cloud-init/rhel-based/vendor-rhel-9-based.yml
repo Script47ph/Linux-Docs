@@ -7,6 +7,9 @@ ntp:
 runcmd:
   - dnf config-manager --set-enabled crb
   - dnf install -y epel-release
+  - dnf install -y zram-generator nano vim
   - dnf clean all
   - chage -d 0 $(cat /etc/passwd | awk -F ':' '{print $1}' | tail -n1)
+  - sed -i "s,PasswordAuthentication no,PasswordAuthentication yes," /etc/ssh/sshd_config
+  - systemctl restart sshd
   - shutdown -r now
