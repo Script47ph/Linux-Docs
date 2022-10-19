@@ -9,6 +9,7 @@ packages_upgrade: true
 packages:
   - qemu-guest-agent
 runcmd:
+  - chage -d 0 $(cat /etc/passwd | grep 1000 | cut -d : -f 1)
   - apt-get install -y --install-recommends linux-generic-hwe-18.04
   - apt-get clean
   - apt-get remove
