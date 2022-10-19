@@ -6,7 +6,7 @@ ntp:
   ntp_client: chrony
 runcmd:
   - dnf config-manager --set-enabled powertools
-  - dnf install -y epel-release
+  - dnf install -y epel-release epel-next-release
   - dnf install -y zram-generator nano vim
   - dnf clean all
   - rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org

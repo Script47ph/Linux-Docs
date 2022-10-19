@@ -6,7 +6,8 @@ ntp:
   ntp_client: chrony
 runcmd:
   - dnf config-manager --set-enabled crb
-  - dnf install -y epel-release
+  - dnf install -y epel-release epel-next-release
+  - dnf install -y zram-generator nano vim
   - dnf clean all
   - chage -d 0 $(cat /etc/passwd | awk -F ':' '{print $1}' | tail -n1)
   - shutdown -r now
