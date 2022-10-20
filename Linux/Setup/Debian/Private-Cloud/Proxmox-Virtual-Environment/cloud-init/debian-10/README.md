@@ -1,4 +1,4 @@
-##  Cloud Image base for Proxmox
+## Debian Buster Cloud Image base for Proxmox
 
 ### Export VM variables
 
