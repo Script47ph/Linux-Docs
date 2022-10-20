@@ -1,20 +1,20 @@
-## Debian Buster Cloud Image base for Proxmox
+##  Cloud Image base for Proxmox
 
 ### Export VM variables
 
 ```bash
 export VMID=
-export VMNAME=Debian-10
+export VMNAME=Debian-11
 export VMMACHINE=q35
 export VMMEMORY=1024
 export VMNET0=virtio,bridge=vmbr0
 export PROXMOXSTRG=local
 export OUTPUTDIR=/var/lib/vz/template/iso
-export OUTPUTFILE=debian-10-generic-amd64-daily-20221019-1173.qcow2
-export CLOUDIMGURL=https://cloud.debian.org/images/cloud/buster/daily/20221019-1173/debian-10-generic-amd64-daily-20221019-1173.qcow2
+export OUTPUTFILE=debian-11-generic-amd64-daily-20221020-1174.qcow2
+export CLOUDIMGURL=https://cloud.debian.org/images/cloud/bullseye/daily/20221020-1174/debian-11-generic-amd64-daily-20221020-1174.qcow2
 export CLOUDINITDIR=/var/lib/vz/snippets
-export CLOUDINITFILE=vendor-debian-10.yaml
-export CLOUDINITURL=https://raw.githubusercontent.com/Script47ph/Linux-Docs/main/Linux/Setup/Debian/Private-Cloud/Proxmox-Virtual-Environment/cloud-init/debian-10/vendor-debian-10.yml
+export CLOUDINITFILE=vendor-debian-11.yaml
+export CLOUDINITURL=https://raw.githubusercontent.com/Script47ph/Linux-Docs/main/Linux/Setup/Debian/Private-Cloud/Proxmox-Virtual-Environment/cloud-init/debian-11/vendor-debian-11.yml
 ```
 
 ### Download the latest cloud image
