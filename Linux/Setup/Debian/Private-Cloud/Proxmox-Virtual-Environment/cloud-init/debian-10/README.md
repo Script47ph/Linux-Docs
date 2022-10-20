@@ -4,7 +4,7 @@
 
 ```bash
 export VMID=
-export VMNAME=debian-10
+export VMNAME=Debian-10
 export VMMACHINE=q35
 export VMMEMORY=1024
 export VMNET0=virtio,bridge=vmbr0
