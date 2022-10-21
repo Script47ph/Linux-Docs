@@ -1,6 +1,6 @@
 #cloud-config
 timezone: Asia/Jakarta
-local: en_US
+locale: en_US
 ntp:
   enabled: true
   ntp_client: chrony
