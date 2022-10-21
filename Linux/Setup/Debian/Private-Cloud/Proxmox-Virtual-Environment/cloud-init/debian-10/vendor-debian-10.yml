@@ -1,6 +1,6 @@
 #cloud-config
 timezone: Asia/Jakarta
-local: en_US
+locale: en_US
 ntp:
   enabled: true
   ntp_client: chrony
@@ -11,6 +11,10 @@ packages:
   - zram-tools
 runcmd:
   - |
+    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+    echo "en_US ISO-8859-1" >> /etc/locale.gen
+    echo "id_ID.UTF-8 UTF-8" >> /etc/locale.gen
+    echo "id_ID ISO-8859-1" >> /etc/locale.gen
     apt-get -t buster-backports install -y linux-image-cloud-amd64
     apt-get clean
     apt-get remove
