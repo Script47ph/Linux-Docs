@@ -11,6 +11,7 @@ export VMNET0=virtio,bridge=vmbr0
 export PROXMOXSTRG=local
 export OUTPUTDIR=/var/lib/vz/template/iso
 export OUTPUTFILE=AlmaLinux-8-GenericCloud-latest.x86_64.qcow2
+export OUTPUTFORMAT="--format qcow2"
 export CLOUDIMGURL=https://repo.almalinux.org/almalinux/8/cloud/x86_64/images/AlmaLinux-8-GenericCloud-latest.x86_64.qcow2
 export CLOUDINITDIR=/var/lib/vz/snippets
 export CLOUDINITFILE=vendor-rhel-8-based.yaml
@@ -32,13 +33,13 @@ qm create ${VMID} --name ${VMNAME} --machine ${VMMACHINE} --memory ${VMMEMORY} -
 ### Import the cloud image
 
 ```bash
-qm importdisk ${VMID} ${OUTPUTDIR}/${OUTPUTFILE} ${PROXMOXSTRG}
+qm importdisk ${VMID} ${OUTPUTDIR}/${OUTPUTFILE} ${PROXMOXSTRG} ${OUTPUTFORMAT}
 ```
 
 ### Attach the cloud image to the VM
 
 ```bash
-qm set ${VMID} --scsihw virtio-scsi-pci --scsi0 ${PROXMOXSTRG}:${VMID}/vm-${VMID}-disk-0.raw
+qm set ${VMID} --scsihw virtio-scsi-pci --scsi0 ${PROXMOXSTRG}:${VMID}/vm-${VMID}-disk-0.qcow2
 ```
 
 ### Add a cloud-init drive
