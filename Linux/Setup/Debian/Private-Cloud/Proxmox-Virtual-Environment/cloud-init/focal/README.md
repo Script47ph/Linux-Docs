@@ -8,9 +8,10 @@ export VMNAME=Ubuntu-Focal
 export VMMACHINE=q35
 export VMMEMORY=1024
 export VMNET0=virtio,bridge=vmbr0
-export PROXMOXSTRG=local
+export PROXMOXSTRG=
 export OUTPUTDIR=/var/lib/vz/template/iso
 export OUTPUTFILE=focal-server-cloudimg-amd64.img
+export OUTPUTFORMAT="--format qcow2"
 export CLOUDIMGURL=https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
 export CLOUDINITDIR=/var/lib/vz/snippets
 export CLOUDINITFILE=vendor-ubuntu-focal.yaml
@@ -32,13 +33,13 @@ qm create ${VMID} --name ${VMNAME} --machine ${VMMACHINE} --memory ${VMMEMORY} -
 ### Import the cloud image
 
 ```bash
-qm importdisk ${VMID} ${OUTPUTDIR}/${OUTPUTFILE} ${PROXMOXSTRG}
+qm importdisk ${VMID} ${OUTPUTDIR}/${OUTPUTFILE} ${PROXMOXSTRG} ${OUTPUTFORMAT}
 ```
 
 ### Attach the cloud image to the VM
 
 ```bash
-qm set ${VMID} --scsihw virtio-scsi-pci --scsi0 ${PROXMOXSTRG}:${VMID}/vm-${VMID}-disk-0.raw
+qm set ${VMID} --scsihw virtio-scsi-pci --scsi0 ${PROXMOXSTRG}:${VMID}/vm-${VMID}-disk-0.qcow2
 ```
 
 ### Add a cloud-init drive

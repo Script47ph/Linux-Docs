@@ -9,9 +9,10 @@ export VMMACHINE=q35
 export VMHOST=host
 export VMMEMORY=1024
 export VMNET0=virtio,bridge=vmbr0
-export PROXMOXSTRG=local
+export PROXMOXSTRG=
 export OUTPUTDIR=/var/lib/vz/template/iso
 export OUTPUTFILE=CentOS-Stream-GenericCloud-9-20220919.0.x86_64.qcow2
+export OUTPUTFORMAT="--format qcow2"
 export CLOUDIMGURL=https://cloud.centos.org/centos/9-stream/x86_64/images/CentOS-Stream-GenericCloud-9-20220919.0.x86_64.qcow2
 export CLOUDINITDIR=/var/lib/vz/snippets
 export CLOUDINITFILE=vendor-centos-9-stream.yaml
@@ -33,13 +34,13 @@ qm create ${VMID} --name ${VMNAME} --machine ${VMMACHINE} --memory ${VMMEMORY} -
 ### Import the cloud image
 
 ```bash
-qm importdisk ${VMID} ${OUTPUTDIR}/${OUTPUTFILE} ${PROXMOXSTRG}
+qm importdisk ${VMID} ${OUTPUTDIR}/${OUTPUTFILE} ${PROXMOXSTRG} ${OUTPUTFORMAT}
 ```
 
 ### Attach the cloud image to the VM
 
 ```bash
-qm set ${VMID} --scsihw virtio-scsi-pci --scsi0 ${PROXMOXSTRG}:${VMID}/vm-${VMID}-disk-0.raw
+qm set ${VMID} --scsihw virtio-scsi-pci --scsi0 ${PROXMOXSTRG}:${VMID}/vm-${VMID}-disk-0.qcow2
 ```
 
 ### Add a cloud-init drive
