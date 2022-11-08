@@ -9,6 +9,8 @@ packages_upgrade: true
 packages:
   - qemu-guest-agent
   - zram-tools
+  - curl
+  - wget
 runcmd:
   - |
     echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
@@ -16,6 +18,8 @@ runcmd:
     echo "id_ID.UTF-8 UTF-8" >> /etc/locale.gen
     echo "id_ID ISO-8859-1" >> /etc/locale.gen
     locale-gen
+    curl -L https://github.com/ddo/fast/releases/download/v0.0.4/fast_linux_amd64 -o /usr/bin/fast
+    chmod +x /usr/bin/fast
     apt-get clean
     apt-get remove
     echo "PERCENT=50" >> /etc/default/zramswap

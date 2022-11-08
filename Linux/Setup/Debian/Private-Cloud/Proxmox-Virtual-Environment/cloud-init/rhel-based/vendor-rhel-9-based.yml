@@ -7,8 +7,10 @@ ntp:
 runcmd:
   - dnf config-manager --set-enabled crb
   - dnf install -y epel-release
-  - dnf install -y zram-generator nano vim
+  - dnf install -y zram-generator nano vim curl wget
   - dnf clean all
+  - curl -L https://github.com/ddo/fast/releases/download/v0.0.4/fast_linux_amd64 -o /usr/bin/fast
+  - chmod +x /usr/bin/fast
   - chage -d 0 $(cat /etc/passwd | awk -F ':' '{print $1}' | tail -n1)
   - sed -i "s,PasswordAuthentication no,PasswordAuthentication yes," /etc/ssh/sshd_config
   - systemctl restart sshd

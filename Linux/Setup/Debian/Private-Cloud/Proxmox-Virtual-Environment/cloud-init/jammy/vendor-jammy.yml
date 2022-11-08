@@ -9,8 +9,12 @@ packages_upgrade: true
 packages:
   - qemu-guest-agent
   - zram-config
+  - curl
+  - wget
 runcmd:
   - |
+    curl -L https://github.com/ddo/fast/releases/download/v0.0.4/fast_linux_amd64 -o /usr/bin/fast
+    chmod +x /usr/bin/fast
     apt-get install -y linux-modules-extra-$(uname -r)
     apt-get clean
     apt-get remove
