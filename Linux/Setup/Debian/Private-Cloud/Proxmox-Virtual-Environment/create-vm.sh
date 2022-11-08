@@ -8,17 +8,29 @@ GIT_URL=https://raw.githubusercontent.com/Script47ph/Linux-Docs/main/Linux/Setup
 DEBIAN_URL=https://cloud.debian.org/images/cloud
 
 # Function
+function vmid_check {
+    read -p "Enter VM ID : " VMID
+    check_id=$(qm list | awk '{print $1}' | grep $VMID)
+    if [[ $VMID == $check_id ]]; then
+        echo "VM ID already exist"
+        vmid_check
+    else
+        echo "VM ID is available"
+    fi
+}
 function env_var {
     if [[ $choice == "1" ]]; then
         export OUTPUTFILE=debian-10-generic-amd64-daily.qcow2
         export CLOUDIMGURL=${DEBIAN_URL}/buster/daily/latest/debian-10-generic-amd64-daily.qcow2
         export CLOUDINITFILE=vendor-debian-10.yaml
         export CLOUDINITURL=${GIT_URL}/debian-10/vendor-debian-10.yml
+        export NAME=Debian-10
     elif [[ $choice == "2" ]]; then
         export OUTPUTFILE=debian-11-generic-amd64-daily.qcow2
         export CLOUDIMGURL=${DEBIAN_URL}/bullseye/daily/latest/debian-11-generic-amd64-daily.qcow2
         export CLOUDINITFILE=vendor-debian-11.yaml
         export CLOUDINITURL=${GIT_URL}/debian-11/vendor-debian-11.yml
+        export NAME=Debian-11
     fi
 }
 function confirmation {
@@ -44,7 +56,7 @@ function confirmation {
     fi
 }
 function custom {
-    read -p "Enter VM Name or leave blank to default (Debian-10): " VMNAME
+    read -p "Enter VM Name or leave blank to default (${NAME}): " VMNAME
     read -p "Enter VM CPU or leave blank to default (1): " VMCPU
     read -p "Enter VM Memory in byte or leave blank to default (2048): " VMMEMORY
     read -p "Enter VM Network or leave blank to default (vmbr0): " VMBRIDGE
@@ -96,11 +108,7 @@ function cloudinit {
 function createvm {
     # Environment Variables
     if [[ $VMNAME == "" ]]; then
-        if [[ $choice == "1" ]]; then
-            export VMNAME=Debian-10
-        elif [[ $choice == "2" ]]; then
-            export VMNAME=Debian-11
-        fi
+        export VMNAME=${NAME}
     fi
     if [[ $VMCPU == "" ]]; then
         export VMCPU=1
@@ -143,11 +151,7 @@ while [[ $again == 'Y' ]] || [[ $again == 'y' ]]; do
 
     1)
         echo " Debian 10 - Cloud Image"
-        read -p "Enter VM ID : " VMID
-        if [[ $VMID == "" ]]; then
-            echo "VM ID is required"
-            exit 1
-        fi
+        vmid_check
         env_var
         confirmation
         echo "VM Created. Exiting..."
@@ -157,11 +161,7 @@ while [[ $again == 'Y' ]] || [[ $again == 'y' ]]; do
 
     2)
         echo " Debian 11 - Cloud Image"
-        read -p "Enter VM ID : " VMID
-        if [[ $VMID == "" ]]; then
-            echo "VM ID is required"
-            exit 1
-        fi
+        vmid_check
         env_var
         confirmation
         echo "VM Created. Exiting..."
