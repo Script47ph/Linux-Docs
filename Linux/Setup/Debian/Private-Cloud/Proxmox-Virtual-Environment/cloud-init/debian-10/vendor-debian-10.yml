@@ -13,17 +13,17 @@ packages:
   - wget
 runcmd:
   - |
-    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-    echo "en_US ISO-8859-1" >> /etc/locale.gen
-    echo "id_ID.UTF-8 UTF-8" >> /etc/locale.gen
-    echo "id_ID ISO-8859-1" >> /etc/locale.gen
+    sed -i "s,# en_US.UTF-8 UTF-8,en_US.UTF-8 UTF-8," /etc/locale.gen
+    sed -i "s,# en_US ISO-8859-1,en_US ISO-8859-1," /etc/locale.gen
+    sed -i "s,# id_ID.UTF-8 UTF-8,id_ID.UTF-8 UTF-8," /etc/locale.gen
+    sed -i "s,# id_ID ISO-8859-1,id_ID ISO-8859-1," /etc/locale.gen
     locale-gen
     curl -L https://github.com/ddo/fast/releases/download/v0.0.4/fast_linux_amd64 -o /usr/bin/fast
     chmod +x /usr/bin/fast
     apt-get -t buster-backports install -y linux-image-cloud-amd64
     apt-get clean
     apt-get remove
-    echo "PERCENTAGE=50" >> /etc/default/zramswap
+    sed -i "s,#PERCENTAGE=10,PERCENTAGE=50," /etc/default/zramswap
     chage -d 0 $(grep 1000 /etc/passwd | cut -d: -f1)
     sed -i "s,PasswordAuthentication no,PasswordAuthentication yes," /etc/ssh/sshd_config
     systemctl restart sshd
